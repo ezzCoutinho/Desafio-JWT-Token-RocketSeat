@@ -32,11 +32,11 @@ class UserRepository(UserRepositoryInterface):
         )
         self.__connection.commit()
 
-    def get_user_by_username(self, username: str) -> Tuple[int, str, str]:
+    def get_user_by_username(self, username: str) -> Tuple[int, str, str, str]:
         cursor = self.__connection.cursor()
         cursor.execute(
             """
-            SELECT id, username, order_history
+            SELECT id, username, password, order_history
             FROM users
             WHERE username = ?
             """,
