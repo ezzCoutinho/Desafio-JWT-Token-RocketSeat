@@ -27,8 +27,15 @@ class LoginCreator(LoginCreatorControllerInterface):
 
         return formatted_response
 
-    def __find_user(self, username: str) -> Tuple[int, str, str, str]:
-        user = self.__user_repository.get_user_by_username(username)
+    def __find_user(
+        self, identifier: str, by_username: bool = True
+    ) -> Tuple[int, str, str, str]:
+        if by_username:
+            user = self.__user_repository.get_user_by_username_or_id(
+                username=identifier
+            )
+        else:
+            user = self.__user_repository.get_user_by_username_or_id(user_id=identifier)
 
         if not user:
             raise HttpNotFound("User not found")
