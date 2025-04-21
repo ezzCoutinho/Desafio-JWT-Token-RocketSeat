@@ -8,9 +8,11 @@ class UserRepositoryInterface(ABC):
         pass
 
     @abstractmethod
-    def get_user_by_username(self, username: str) -> Tuple[int, str, str, str]:
+    def add_order_to_user(self, user_id: str, order: str) -> None:
         pass
 
     @abstractmethod
-    def add_order_to_user(self, user_id: str, order: str) -> None:
+    def get_user_by_username_or_id(
+        self, username: Optional[str] = None, user_id: Optional[str] = None
+    ) -> Tuple[int, str, str, str]:
         pass
